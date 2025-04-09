@@ -1,4 +1,6 @@
-﻿namespace DiamanteDeX.ConsoleApp
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace DiamanteDeX.ConsoleApp
 {
     internal class Program
     {
@@ -15,7 +17,7 @@
                     numero = NumeroDeEntrada();
                 }
 
-                DesenhoDiamante(numero);
+                DesenhoDoDiamante(numero);
                 Console.ReadLine();
             }
         }
@@ -93,7 +95,7 @@
             return true;
         }
 
-        static void DesenhoDiamante(int numero)
+        static void DiamanteParteSuperior(int numero)
         {
             Console.WriteLine();
             int qtdEspacoEmBranco = (numero / 2);
@@ -118,6 +120,11 @@
                 Console.WriteLine();
                 qtdEspacoEmBranco--;
             }
+        }
+
+        static void DesenhoDoDiamante(int numero)
+        {
+            DiamanteParteSuperior(numero);
         }
     }
 }
