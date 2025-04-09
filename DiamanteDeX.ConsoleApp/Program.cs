@@ -14,6 +14,9 @@
                     CabecalhoInicial();
                     numero = NumeroDeEntrada();
                 }
+
+                DesenhoDiamante(numero);
+                Console.ReadLine();
             }
         }
 
@@ -88,6 +91,33 @@
             }
 
             return true;
+        }
+
+        static void DesenhoDiamante(int numero)
+        {
+            Console.WriteLine();
+            int qtdEspacoEmBranco = (numero / 2);
+            int qtdLinhas = ((numero / 2) + 1);
+
+            for (int linha = 1; linha <= qtdLinhas; linha++)
+            {
+                for (int coluna = 1; coluna <= numero; coluna++)
+                {
+                    int xPosicaoInicial = qtdEspacoEmBranco + 1;
+                    int xPosicaoFinal = numero - (xPosicaoInicial - 1);
+
+                    if (coluna >= xPosicaoInicial && coluna <= xPosicaoFinal)
+                    {
+                        Console.Write("x");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine();
+                qtdEspacoEmBranco--;
+            }
         }
     }
 }
