@@ -17,8 +17,10 @@ namespace DiamanteDeX.ConsoleApp
                     numero = NumeroDeEntrada();
                 }
                 DesenhoDoDiamante(numero);
-                Console.WriteLine("\nPressione ENTER para criar outro diamante...");
-                Console.ReadLine();
+                if (!CriarNovoDiamante())
+                {
+                    break;
+                }
             }
         }
 
@@ -154,6 +156,29 @@ namespace DiamanteDeX.ConsoleApp
         {
             DiamanteParteSuperior(numero);
             DiamanteParteInferior(numero);
+        }
+
+        static bool CriarNovoDiamante()
+        {
+            Console.WriteLine("\n1- Criar outro diamante");
+            Console.WriteLine("2- Sair");
+
+            Console.Write("\nDigite uma das opções: ");
+            string opcao = Console.ReadLine();
+
+            if (opcao == "1")
+            {
+                return true;
+            }
+            else if (opcao == "2")
+            {
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("\nOpção inválida! O programa será encerrado...");
+                return false;
+            }
         }
     }
 }
