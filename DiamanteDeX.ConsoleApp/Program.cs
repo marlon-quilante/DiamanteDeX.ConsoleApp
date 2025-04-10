@@ -16,8 +16,8 @@ namespace DiamanteDeX.ConsoleApp
                     CabecalhoInicial();
                     numero = NumeroDeEntrada();
                 }
-
                 DesenhoDoDiamante(numero);
+                Console.WriteLine("\nPressione ENTER para criar outro diamante...");
                 Console.ReadLine();
             }
         }
@@ -25,9 +25,9 @@ namespace DiamanteDeX.ConsoleApp
         static void CabecalhoInicial()
         {
             Console.Clear();
-            Console.WriteLine("------------------------------------");
-            Console.WriteLine("Diamante de X");
-            Console.WriteLine("------------------------------------");
+            Console.WriteLine("------------------");
+            Console.WriteLine("  Diamante de X");
+            Console.WriteLine("------------------");
         }
 
         static int NumeroDeEntrada()
@@ -36,7 +36,9 @@ namespace DiamanteDeX.ConsoleApp
 
             try
             {
-                Console.Write("\nDigite um número inteiro ímpar maior que 1: ");
+                Console.WriteLine("\nInforme abaixo o tamanho do diamante que deseja criar. " +
+                    "O número do tamanho precisa ser inteiro, ímpar e maior que 1!");
+                Console.Write("\nNúmero do tamanho: ");
                 numero = int.Parse(Console.ReadLine());
 
                 while (true)
@@ -105,10 +107,10 @@ namespace DiamanteDeX.ConsoleApp
             {
                 for (int coluna = 1; coluna <= numero; coluna++)
                 {
-                    int xPosicaoInicial = qtdEspacoEmBranco + 1;
-                    int xPosicaoFinal = numero - (xPosicaoInicial - 1);
+                    int primeiraPosicaoDeX = qtdEspacoEmBranco + 1;
+                    int ultimaPosicaoDeX = numero - (primeiraPosicaoDeX - 1);
 
-                    if (coluna >= xPosicaoInicial && coluna <= xPosicaoFinal)
+                    if (coluna >= primeiraPosicaoDeX && coluna <= ultimaPosicaoDeX)
                     {
                         Console.Write("x");
                     }
@@ -122,9 +124,36 @@ namespace DiamanteDeX.ConsoleApp
             }
         }
 
+        static void DiamanteParteInferior(int numero)
+        {
+            int qtdEspacoEmBranco = 1;
+            int qtdLinhas = numero / 2;
+
+            for (int linha = 1; linha <= qtdLinhas; linha++)
+            {
+                for (int coluna = 1; coluna <= numero; coluna++)
+                {
+                    int primeiraPosicaoDeX = qtdEspacoEmBranco + 1;
+                    int ultimaPosicaoDeX = numero - (primeiraPosicaoDeX - 1);
+
+                    if (coluna >= primeiraPosicaoDeX && coluna <= ultimaPosicaoDeX)
+                    {
+                        Console.Write("x");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine();
+                qtdEspacoEmBranco++;
+            }
+        }
+
         static void DesenhoDoDiamante(int numero)
         {
             DiamanteParteSuperior(numero);
+            DiamanteParteInferior(numero);
         }
     }
 }
