@@ -16,7 +16,8 @@ namespace DiamanteDeX.ConsoleApp
                     CabecalhoInicial();
                     numero = NumeroDeEntrada();
                 }
-                DesenhoDoDiamante(numero);
+
+                Diamante.Desenho(numero);
                 if (!CriarNovoDiamante())
                 {
                     break;
@@ -97,65 +98,6 @@ namespace DiamanteDeX.ConsoleApp
             }
 
             return true;
-        }
-
-        static void DiamanteParteSuperior(int numero)
-        {
-            Console.WriteLine();
-            int qtdEspacoEmBranco = (numero / 2);
-            int qtdLinhas = ((numero / 2) + 1);
-
-            for (int linha = 1; linha <= qtdLinhas; linha++)
-            {
-                for (int coluna = 1; coluna <= numero; coluna++)
-                {
-                    int primeiraPosicaoDeX = qtdEspacoEmBranco + 1;
-                    int ultimaPosicaoDeX = numero - (primeiraPosicaoDeX - 1);
-
-                    if (coluna >= primeiraPosicaoDeX && coluna <= ultimaPosicaoDeX)
-                    {
-                        Console.Write("x");
-                    }
-                    else
-                    {
-                        Console.Write(" ");
-                    }
-                }
-                Console.WriteLine();
-                qtdEspacoEmBranco--;
-            }
-        }
-
-        static void DiamanteParteInferior(int numero)
-        {
-            int qtdEspacoEmBranco = 1;
-            int qtdLinhas = numero / 2;
-
-            for (int linha = 1; linha <= qtdLinhas; linha++)
-            {
-                for (int coluna = 1; coluna <= numero; coluna++)
-                {
-                    int primeiraPosicaoDeX = qtdEspacoEmBranco + 1;
-                    int ultimaPosicaoDeX = numero - (primeiraPosicaoDeX - 1);
-
-                    if (coluna >= primeiraPosicaoDeX && coluna <= ultimaPosicaoDeX)
-                    {
-                        Console.Write("x");
-                    }
-                    else
-                    {
-                        Console.Write(" ");
-                    }
-                }
-                Console.WriteLine();
-                qtdEspacoEmBranco++;
-            }
-        }
-
-        static void DesenhoDoDiamante(int numero)
-        {
-            DiamanteParteSuperior(numero);
-            DiamanteParteInferior(numero);
         }
 
         static bool CriarNovoDiamante()
