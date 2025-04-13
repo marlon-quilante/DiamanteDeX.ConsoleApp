@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace DiamanteDeX.ConsoleApp
+﻿namespace DiamanteDeX.ConsoleApp
 {
     internal class Program
     {
@@ -9,15 +7,15 @@ namespace DiamanteDeX.ConsoleApp
             while (true)
             {
                 CabecalhoInicial();
-                int numero = NumeroDeEntrada();
+                Diamante.NumeroTamanho = NumeroDeEntrada();
 
-                while (!NumeroValidado(numero))
+                while (!NumeroValidado())
                 {
                     CabecalhoInicial();
-                    numero = NumeroDeEntrada();
+                    Diamante.NumeroTamanho = NumeroDeEntrada();
                 }
 
-                Diamante.Desenho(numero);
+                Diamante.Desenho();
                 if (!CriarNovoDiamante())
                 {
                     break;
@@ -44,42 +42,6 @@ namespace DiamanteDeX.ConsoleApp
                 Console.Write("\nNúmero do tamanho: ");
                 numero = int.Parse(Console.ReadLine());
 
-                while (true)
-                {
-                    if (numero == 0)
-                    {
-                        CabecalhoInicial();
-                        Console.WriteLine("\nO número digitado é zero!");
-                        Console.Write("\nDigite um número inteiro ímpar maior que 1: ");
-                        numero = int.Parse(Console.ReadLine());
-                    }
-                    else if (numero < 0)
-                    {
-                        CabecalhoInicial();
-                        Console.WriteLine("\nO número digitado é negativo!");
-                        Console.Write("\nDigite um número inteiro ímpar maior que 1: ");
-                        numero = int.Parse(Console.ReadLine());
-                    }
-                    else if (numero == 1)
-                    {
-                        CabecalhoInicial();
-                        Console.WriteLine("\nO número digitado é 1!");
-                        Console.Write("\nDigite um número inteiro ímpar maior que 1: ");
-                        numero = int.Parse(Console.ReadLine());
-                    }
-                    else if (numero % 2 == 0)
-                    {
-                        CabecalhoInicial();
-                        Console.WriteLine("\nO número digitado não é ímpar!");
-                        Console.Write("\nDigite um número inteiro ímpar maior que 1: ");
-                        numero = int.Parse(Console.ReadLine());
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
                 return numero;
             }
             catch (Exception ex)
@@ -90,11 +52,74 @@ namespace DiamanteDeX.ConsoleApp
             }
         }
 
-        static bool NumeroValidado(int numero)
+        static bool ValidarNumeroZero()
         {
-            if (numero == 0)
+            while (Diamante.NumeroTamanho == 0)
             {
-                return false;
+                CabecalhoInicial();
+                Console.WriteLine("\nO número digitado é zero!");
+                Console.Write("\nDigite um número inteiro ímpar maior que 1: ");
+                Diamante.NumeroTamanho = int.Parse(Console.ReadLine());
+
+                return true;
+            }
+
+            return false;
+        }
+
+        static bool ValidarNumeroNegativo()
+        {
+            while (Diamante.NumeroTamanho < 0)
+            {
+                CabecalhoInicial();
+                Console.WriteLine("\nO número digitado é negativo!");
+                Console.Write("\nDigite um número inteiro ímpar maior que 1: ");
+                Diamante.NumeroTamanho = int.Parse(Console.ReadLine());
+
+                return true;
+            }
+
+            return false;
+        }
+
+        static bool ValidarNumero1()
+        {
+            while (Diamante.NumeroTamanho == 1)
+            {
+                CabecalhoInicial();
+                Console.WriteLine("\nO número digitado é 1!");
+                Console.Write("\nDigite um número inteiro ímpar maior que 1: ");
+                Diamante.NumeroTamanho = int.Parse(Console.ReadLine());
+
+                return true;
+            }
+
+            return false;
+        }
+
+        static bool ValidarNumeroPar()
+        {
+            while (Diamante.NumeroTamanho % 2 == 0)
+            {
+                CabecalhoInicial();
+                Console.WriteLine("\nO número digitado não é ímpar!");
+                Console.Write("\nDigite um número inteiro ímpar maior que 1: ");
+                Diamante.NumeroTamanho = int.Parse(Console.ReadLine());
+
+                return true;
+            }
+
+            return false;
+        }
+
+        static bool NumeroValidado()
+        {
+            while (true)
+            {
+                if (!ValidarNumeroZero() && !ValidarNumeroNegativo() && !ValidarNumero1() && !ValidarNumeroPar() && Diamante.NumeroTamanho != 0)
+                {
+                    break;
+                }
             }
 
             return true;
